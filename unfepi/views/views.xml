@@ -1,0 +1,66 @@
+<odoo>
+  <data>
+
+     <record model="ir.ui.view" id="add_field_attendance_tree">
+         <field name="name">add.field.product.tree</field>
+         <field name="model">hr.attendance</field>
+         <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+         <field name="arch" type="xml">
+         <xpath expr="//field[@name='check_out']" position="after">
+                  <field name="duty_type"/>
+                  <field name="assigned_location"/>
+                  <field name="calendar_id"/>
+                  <!--<field name="assigned_latitude"/>
+                  <field name="assigned_longitude"/>
+                  <field name="assigned_geopoint"/>
+                  <field name="assigned_checkin_time"/>
+                  <field name="assigned_checkout_time"/>-->
+                  <field name="assigned_lax_period_minutes"/>
+                 <!-- <field name="checkin_latitude"/>
+                  <field name="checkin_longitude"/>
+                  <field name="checkin_geopoint"/>-->
+                  <field name="checkin_status"/>
+                  <!--<field name="checkout_latitude"/>
+                  <field name="checkout_longitude"/>
+                  <field name="checkout_geopoint"/>-->
+                  <field name="checkout_status"/>
+             </xpath>
+         </field>
+     </record>
+
+
+    <record model="ir.ui.view" id="add_field_product_form">
+      <field name="name">add.field.product.form</field>
+      <field name="model">hr.attendance</field>
+      <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+      <field name="arch" type="xml">
+      <xpath expr="//field[@name='check_out']" position="after">
+                  <field name="duty_type"/>
+                    <group string="Assigned Fields">
+                          <field name="assigned_location"/>
+                          <field name="assigned_latitude"/>
+                          <field name="assigned_longitude"/>
+                          <field name="assigned_geopoint"/>
+                          <field name="assigned_checkin_time"/>
+                          <field name="assigned_checkout_time"/>
+                          <field name="assigned_lax_period_minutes"/>
+                          <field name="calendar_id"/>
+                    </group>
+                     <group string="Check In">
+                          <field name="checkin_latitude"/>
+                          <field name="checkin_longitude"/>
+                          <field name="checkin_geopoint"/>
+                          <field name="checkin_status"/>
+                     </group>
+                     <group string="Check Out">
+                          <field name="checkout_latitude"/>
+                          <field name="checkout_longitude"/>
+                          <field name="checkout_geopoint"/>
+                          <field name="checkout_status"/>
+                    </group>
+      </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

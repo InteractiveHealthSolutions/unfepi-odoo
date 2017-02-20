@@ -1,0 +1,20 @@
+/*
+.openerp .navbar-nav &gt; li &gt; a {
+    color: red;
+}
+
+.o_web_client > .o_main .o_sub_menu {
+display: none;
+}
+
+.o_web_client > .o_main .o_main_content .o_control_panel {
+display: none;
+}
+
+.o_web_client .navbar {
+display: none;
+}*/
+
+.table-striped > tbody > tr:nth-of-type(odd){
+    background-color: #FFE9DD;
+}
