@@ -71,6 +71,48 @@ class unfepi(models.Model):
         #     rec['parent_name'] = a.name
         return records
 
+	    def get_emp_attendances(self, date_start, date_end):
+        employees = self.env['hr.employee'].search([])
+        empRecords = {}
+        for emp in employees:
+            emp_att_recs = self.search([('employee_id', '=', emp.id)])
+            list = []
+            for rec in emp_att_recs:
+                if rec.check_in[0:10] >= date_start and rec.check_in[0:10] <= date_end:
+                    record_read = rec.read()[0]
+                    att_dict = {}
+                    att_dict["employee"] = record_read["employee_id"]
+                    att_dict["check_in"] = record_read["check_in"]
+                    att_dict["check_out"] = record_read["check_out"]
+                    # att_dict["calendar_id"] = record_read["calendar_id"]
+                    att_dict["duty_type"] = record_read["duty_type"]
+                    att_dict["checkin_status"] = record_read["checkin_status"]
+                    att_dict["checkout_status"] = record_read["checkout_status"]
+                    att_dict["employee_unique_id"] = rec.employee_id.identification_id
+                    list.append(att_dict)
+            if emp.identification_id is not False:
+                empRecords[emp.identification_id] = list
+        print empRecords
+        return empRecords
+
+    def get_attendances(self, date_start, date_end):
+        attendances = []
+        attendance_records = self.search([])
+        for rec in attendance_records:
+            if rec.check_in[0:10] >= date_start and rec.check_in[0:10] <= date_end:
+                dict = rec.read()[0]
+                att_dict = {}
+                att_dict["employee"] = dict["employee_id"]
+                att_dict["check_in"] = dict["check_in"]
+                att_dict["check_out"] = dict["check_out"]
+                att_dict["calendar_id"] = dict["calendar_id"]
+                att_dict["duty_type"] = dict["duty_type"]
+                att_dict["checkin_status"] = dict["checkin_status"]
+                att_dict["checkout_status"] = dict["checkout_status"]
+                att_dict["employee_unique_id"] = rec.employee_id.identification_id
+                attendances.append(att_dict)
+        return attendances
+		
 class holidays_custom(models.Model):
     _inherit = ['hr.holidays.public.line']
 
